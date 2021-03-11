@@ -102,6 +102,13 @@
             "unknown": "Desconhecido"
         }
     },
+    "supervisor": {
+        "snapshot": {
+            "folder": {
+                "homeassistant": "Configuração do Home Assistant"
+            }
+        }
+    },
     "ui": {
         "auth_store": {
             "ask": "Você deseja continuar logado?",
@@ -1872,7 +1879,7 @@
                         }
                     }
                 },
-                "tags": {
+                "tag": {
                     "add_tag": "Adicionar etiqueta",
                     "caption": "Etiquetas",
                     "create_automation": "Criar automação com a etiqueta",

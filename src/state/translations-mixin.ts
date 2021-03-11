@@ -12,8 +12,8 @@ import { translationMetadata } from "../resources/translations-metadata";
 import { Constructor, HomeAssistant } from "../types";
 import { storeState } from "../util/ha-pref-storage";
 import {
-  getLocalLanguage,
   getTranslation,
+  getLocalLanguage,
   getUserLanguage,
 } from "../util/hass-translation";
 import { HassBaseEl } from "./hass-base-mixin";
@@ -230,7 +230,7 @@ export default <T extends Constructor<HassBaseEl>>(superClass: T) =>
       }
       this.__loadedFragmetTranslations.add(fragment);
       const result = await getTranslation(fragment, language);
-      this._updateResources(result.language, result.data);
+      await this._updateResources(result.language, result.data);
     }
 
     private async _loadCoreTranslations(language: string) {
