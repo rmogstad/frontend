@@ -11,6 +11,7 @@ import {
   TemplateResult,
 } from "lit-element";
 import { navigate } from "../common/navigate";
+import { LocalizeFunc } from "../common/translations/localize";
 import { computeRTLDirection } from "../common/util/compute_rtl";
 import "../components/data-table/ha-data-table";
 import type {
@@ -18,6 +19,7 @@ import type {
   DataTableRowData,
   HaDataTable,
 } from "../components/data-table/ha-data-table";
+import { haStyleScrollbar } from "../resources/styles";
 import type { HomeAssistant, Route } from "../types";
 import "./hass-tabs-subpage";
 import type { PageNavigation } from "./hass-tabs-subpage";
@@ -25,6 +27,8 @@ import type { PageNavigation } from "./hass-tabs-subpage";
 @customElement("hass-tabs-subpage-data-table")
 export class HaTabsSubpageDataTable extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
+
+  @property({ attribute: false }) public localizeFunc?: LocalizeFunc;
 
   @property({ type: Boolean }) public isWide = false;
 
@@ -121,6 +125,7 @@ export class HaTabsSubpageDataTable extends LitElement {
     return html`
       <hass-tabs-subpage
         .hass=${this.hass}
+        .localizeFunc=${this.localizeFunc}
         .narrow=${this.narrow}
         .isWide=${this.isWide}
         .backPath=${this.backPath}
@@ -226,67 +231,70 @@ export class HaTabsSubpageDataTable extends LitElement {
     navigate(this, window.location.pathname);
   }
 
-  static get styles(): CSSResult {
-    return css`
-      ha-data-table {
-        width: 100%;
-        height: 100%;
-        --data-table-border-width: 0;
-      }
-      :host(:not([narrow])) ha-data-table {
-        height: calc(100vh - 1px - var(--header-height));
-        display: block;
-      }
-      .table-header {
-        border-bottom: 1px solid rgba(var(--rgb-primary-text-color), 0.12);
-        padding: 0 16px;
-        display: flex;
-        align-items: center;
-      }
-      .search-toolbar {
-        display: flex;
-        align-items: center;
-        color: var(--secondary-text-color);
-        padding: 0 16px;
-      }
-      search-input {
-        position: relative;
-        top: 2px;
-        flex-grow: 1;
-      }
-      search-input.header {
-        left: -8px;
-      }
-      .active-filters {
-        color: var(--primary-text-color);
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 2px 2px 2px 8px;
-        margin-left: 4px;
-        font-size: 14px;
-      }
-      .active-filters ha-icon {
-        color: var(--primary-color);
-      }
-      .active-filters mwc-button {
-        margin-left: 8px;
-      }
-      .active-filters::before {
-        background-color: var(--primary-color);
-        opacity: 0.12;
-        border-radius: 4px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        content: "";
-      }
-      .search-toolbar .active-filters {
-        top: -8px;
-        right: -16px;
-      }
-    `;
+  static get styles(): CSSResult[] {
+    return [
+      haStyleScrollbar,
+      css`
+        ha-data-table {
+          width: 100%;
+          height: 100%;
+          --data-table-border-width: 0;
+        }
+        :host(:not([narrow])) ha-data-table {
+          height: calc(100vh - 1px - var(--header-height));
+          display: block;
+        }
+        .table-header {
+          border-bottom: 1px solid rgba(var(--rgb-primary-text-color), 0.12);
+          padding: 0 16px;
+          display: flex;
+          align-items: center;
+        }
+        .search-toolbar {
+          display: flex;
+          align-items: center;
+          color: var(--secondary-text-color);
+          padding: 0 16px;
+        }
+        search-input {
+          position: relative;
+          top: 2px;
+          flex-grow: 1;
+        }
+        search-input.header {
+          left: -8px;
+        }
+        .active-filters {
+          color: var(--primary-text-color);
+          position: relative;
+          display: flex;
+          align-items: center;
+          padding: 2px 2px 2px 8px;
+          margin-left: 4px;
+          font-size: 14px;
+        }
+        .active-filters ha-icon {
+          color: var(--primary-color);
+        }
+        .active-filters mwc-button {
+          margin-left: 8px;
+        }
+        .active-filters::before {
+          background-color: var(--primary-color);
+          opacity: 0.12;
+          border-radius: 4px;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          content: "";
+        }
+        .search-toolbar .active-filters {
+          top: -8px;
+          right: -16px;
+        }
+      `,
+    ];
   }
 }

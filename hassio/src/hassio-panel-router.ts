@@ -9,7 +9,7 @@ import "./addon-store/hassio-addon-store";
 // Don't codesplit it, that way the dashboard always loads fast.
 import "./dashboard/hassio-dashboard";
 // Don't codesplit the others, because it breaks the UI when pushed to a Pi
-import "./snapshots/hassio-snapshots";
+// import "./snapshots/hassio-snapshots";
 import "./snapshots/hassio-snapshots-table";
 import "./system/hassio-system";
 
