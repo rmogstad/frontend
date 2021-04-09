@@ -86,9 +86,9 @@ class LovelacePanel extends LitElement {
   }
 
   protected render(): TemplateResult | void {
-    const state = this._state!;
+    const entityState = this._state!;
 
-    if (state === "loaded") {
+    if (entityState === "loaded") {
       return html`
         <hui-root
           .hass=${this.hass}
@@ -100,7 +100,7 @@ class LovelacePanel extends LitElement {
       `;
     }
 
-    if (state === "error") {
+    if (entityState === "error") {
       return html`
         <hass-error-screen
           .hass=${this.hass}
@@ -114,7 +114,7 @@ class LovelacePanel extends LitElement {
       `;
     }
 
-    if (state === "yaml-editor") {
+    if (entityState === "yaml-editor") {
       return html`
         <hui-editor
           .hass=${this.hass}

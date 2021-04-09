@@ -125,14 +125,14 @@ export class HaConfigHelpers extends LitElement {
   );
 
   private _getItems = memoize((stateItems: HassEntity[]) => {
-    return stateItems.map((state) => {
+    return stateItems.map((entityState) => {
       return {
-        id: state.entity_id,
-        icon: state.attributes.icon,
-        name: state.attributes.friendly_name || "",
-        entity_id: state.entity_id,
-        editable: state.attributes.editable,
-        type: computeStateDomain(state),
+        id: entityState.entity_id,
+        icon: entityState.attributes.icon,
+        name: entityState.attributes.friendly_name || "",
+        entity_id: entityState.entity_id,
+        editable: entityState.attributes.editable,
+        type: computeStateDomain(entityState),
       };
     });
   });

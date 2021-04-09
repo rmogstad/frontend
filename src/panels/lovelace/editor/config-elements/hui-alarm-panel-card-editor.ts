@@ -92,10 +92,10 @@ export class HuiAlarmPanelCardEditor extends LitElement
           .configValue="${"name"}"
           @value-changed="${this._valueChanged}"
         ></paper-input>
-        <span>Used States</span> ${this._states.map((state, index) => {
+        <span>Used States</span> ${this._states.map((entityState, index) => {
           return html`
             <div class="states">
-              <paper-item>${state}</paper-item>
+              <paper-item>${entityState}</paper-item>
               <ha-icon
                 class="deleteState"
                 .value="${index}"
@@ -112,8 +112,8 @@ export class HuiAlarmPanelCardEditor extends LitElement
           @value-changed="${this._stateAdded}"
         >
           <paper-listbox slot="dropdown-content">
-            ${states.map((state) => {
-              return html` <paper-item>${state}</paper-item> `;
+            ${states.map((entityState) => {
+              return html` <paper-item>${entityState}</paper-item> `;
             })}
           </paper-listbox>
         </paper-dropdown-menu>

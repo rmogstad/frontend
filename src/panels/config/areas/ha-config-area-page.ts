@@ -154,27 +154,27 @@ class HaConfigAreaPage extends LitElement {
                     )}
                     >${this._related?.automation?.length
                       ? this._related.automation.map((automation) => {
-                          const state = this.hass.states[automation];
-                          return state
+                          const entityState = this.hass.states[automation];
+                          return entityState
                             ? html`
                                 <div>
                                   <a
                                     href=${ifDefined(
-                                      state.attributes.id
-                                        ? `/config/automation/edit/${state.attributes.id}`
+                                      entityState.attributes.id
+                                        ? `/config/automation/edit/${entityState.attributes.id}`
                                         : undefined
                                     )}
                                   >
                                     <paper-item
-                                      .disabled=${!state.attributes.id}
+                                      .disabled=${!entityState.attributes.id}
                                     >
                                       <paper-item-body>
-                                        ${computeStateName(state)}
+                                        ${computeStateName(entityState)}
                                       </paper-item-body>
                                       <ha-icon-next></ha-icon-next>
                                     </paper-item>
                                   </a>
-                                  ${!state.attributes.id
+                                  ${!entityState.attributes.id
                                     ? html`
                                         <paper-tooltip animation-delay="0">
                                           ${this.hass.localize(
@@ -207,27 +207,27 @@ class HaConfigAreaPage extends LitElement {
                     )}
                     >${this._related?.scene?.length
                       ? this._related.scene.map((scene) => {
-                          const state = this.hass.states[scene];
-                          return state
+                          const entityState = this.hass.states[scene];
+                          return entityState
                             ? html`
                                 <div>
                                   <a
                                     href=${ifDefined(
-                                      state.attributes.id
-                                        ? `/config/scene/edit/${state.attributes.id}`
+                                      entityState.attributes.id
+                                        ? `/config/scene/edit/${entityState.attributes.id}`
                                         : undefined
                                     )}
                                   >
                                     <paper-item
-                                      .disabled=${!state.attributes.id}
+                                      .disabled=${!entityState.attributes.id}
                                     >
                                       <paper-item-body>
-                                        ${computeStateName(state)}
+                                        ${computeStateName(entityState)}
                                       </paper-item-body>
                                       <ha-icon-next></ha-icon-next>
                                     </paper-item>
                                   </a>
-                                  ${!state.attributes.id
+                                  ${!entityState.attributes.id
                                     ? html`
                                         <paper-tooltip animation-delay="0">
                                           ${this.hass.localize(
@@ -258,15 +258,15 @@ class HaConfigAreaPage extends LitElement {
                     )}
                     >${this._related?.script?.length
                       ? this._related.script.map((script) => {
-                          const state = this.hass.states[script];
-                          return state
+                          const entityState = this.hass.states[script];
+                          return entityState
                             ? html`
                                 <a
-                                  href=${`/config/script/edit/${state.entity_id}`}
+                                  href=${`/config/script/edit/${entityState.entity_id}`}
                                 >
                                   <paper-item>
                                     <paper-item-body>
-                                      ${computeStateName(state)}
+                                      ${computeStateName(entityState)}
                                     </paper-item-body>
                                     <ha-icon-next></ha-icon-next>
                                   </paper-item>

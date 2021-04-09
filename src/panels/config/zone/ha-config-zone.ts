@@ -76,22 +76,22 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
 
   private _getZones = memoizeOne(
     (storageItems: Zone[], stateItems: HassEntity[]): MarkerLocation[] => {
-      const stateLocations: MarkerLocation[] = stateItems.map((state) => {
+      const stateLocations: MarkerLocation[] = stateItems.map((stateObject) => {
         return {
-          id: state.entity_id,
-          icon: state.attributes.icon,
-          name: state.attributes.friendly_name || state.entity_id,
-          latitude: state.attributes.latitude,
-          longitude: state.attributes.longitude,
-          radius: state.attributes.radius,
+          id: stateObject.entity_id,
+          icon: stateObject.attributes.icon,
+          name: stateObject.attributes.friendly_name || stateObject.entity_id,
+          latitude: stateObject.attributes.latitude,
+          longitude: stateObject.attributes.longitude,
+          radius: stateObject.attributes.radius,
           radius_color:
-            state.entity_id === "zone.home"
+            stateObject.entity_id === "zone.home"
               ? homeRadiusColor
-              : state.attributes.passive
+              : stateObject.attributes.passive
               ? passiveRadiusColor
               : defaultRadiusColor,
           location_editable:
-            state.entity_id === "zone.home" && this._canEditCore,
+            stateObject.entity_id === "zone.home" && this._canEditCore,
           radius_editable: false,
         };
       });
@@ -167,23 +167,27 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
                   </paper-icon-item>
                 `;
               })}
-              ${this._stateItems.map((state) => {
+              ${this._stateItems.map((stateObject) => {
                 return html`
                   <paper-icon-item
-                    data-id=${state.entity_id}
+                    data-id=${stateObject.entity_id}
                     @click=${this._stateItemClicked}
                   >
-                    <ha-icon .icon=${state.attributes.icon} slot="item-icon">
+                    <ha-icon
+                      .icon=${stateObject.attributes.icon}
+                      slot="item-icon"
+                    >
                     </ha-icon>
                     <paper-item-body>
-                      ${state.attributes.friendly_name || state.entity_id}
+                      ${stateObject.attributes.friendly_name ||
+                      stateObject.entity_id}
                     </paper-item-body>
                     <div style="display:inline-block">
                       <mwc-icon-button
-                        .entityId=${state.entity_id}
+                        .entityId=${stateObject.entity_id}
                         @click=${this._openCoreConfig}
                         disabled=${ifDefined(
-                          state.entity_id === "zone.home" &&
+                          stateObject.entity_id === "zone.home" &&
                             this.narrow &&
                             this._canEditCore
                             ? undefined
@@ -191,7 +195,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
                         )}
                       >
                         <ha-svg-icon
-                          .path=${state.entity_id === "zone.home" &&
+                          .path=${stateObject.entity_id === "zone.home" &&
                           this.narrow &&
                           this._canEditCore
                             ? mdiPencil
@@ -199,7 +203,7 @@ export class HaConfigZone extends SubscribeMixin(LitElement) {
                         ></ha-svg-icon>
                       </mwc-icon-button>
                       <paper-tooltip animation-delay="0" position="left">
-                        ${state.entity_id === "zone.home"
+                        ${stateObject.entity_id === "zone.home"
                           ? this.hass.localize(
                               `ui.panel.config.zone.${
                                 this.narrow
