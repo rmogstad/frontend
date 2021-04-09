@@ -2,7 +2,7 @@ import "@material/mwc-button/mwc-button";
 import "@material/mwc-icon-button/mwc-icon-button";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
   LitElement,
@@ -48,7 +48,7 @@ export class HaButtonToggleGroup extends LitElement {
     fireEvent(this, "value-changed", { value: this.active });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       div {
         display: flex;

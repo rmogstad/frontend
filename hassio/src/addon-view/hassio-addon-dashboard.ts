@@ -6,10 +6,10 @@ import {
 } from "@mdi/js";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -52,7 +52,7 @@ class HassioAddonDashboard extends LitElement {
 
   @property({ type: Boolean }) public narrow!: boolean;
 
-  @internalProperty() _error?: string;
+  @state() _error?: string;
 
   private _computeTail = memoizeOne((route: Route) => {
     const dividerPos = route.path.indexOf("/", 1);
@@ -133,7 +133,7 @@ class HassioAddonDashboard extends LitElement {
     `;
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       hassioStyle,
@@ -177,8 +177,9 @@ class HassioAddonDashboard extends LitElement {
       const requestedAddon = extractSearchParam("addon");
       if (requestedAddon) {
         const addonsInfo = await fetchHassioAddonsInfo(this.hass);
-        const validAddon = addonsInfo.addons
-          .some((addon) => addon.slug === requestedAddon);
+        const validAddon = addonsInfo.addons.some(
+          (addon) => addon.slug === requestedAddon
+        );
         if (!validAddon) {
           this._error = this.supervisor.localize("my.error_addon_not_found");
         } else {

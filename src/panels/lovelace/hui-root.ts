@@ -24,9 +24,9 @@ import "@polymer/paper-tabs/paper-tab";
 import "@polymer/paper-tabs/paper-tabs";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -87,7 +87,7 @@ class HUIRoot extends LitElement {
 
   @property() public route?: { path: string; prefix: string };
 
-  @internalProperty() private _curView?: number | "hass-unused-entities";
+  @state() private _curView?: number | "hass-unused-entities";
 
   @query("ha-app-layout", true) private _appLayout!: haAppLayout;
 
@@ -869,7 +869,7 @@ class HUIRoot extends LitElement {
     fireEvent(this, "iron-resize");
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       css`

@@ -1,9 +1,9 @@
 import "@polymer/paper-input/paper-input";
 import {
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -49,9 +49,9 @@ export class HuiHistoryGraphCardEditor extends LitElement
   implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: HistoryGraphCardConfig;
+  @state() private _config?: HistoryGraphCardConfig;
 
-  @internalProperty() private _configEntities?: EntityConfig[];
+  @state() private _configEntities?: EntityConfig[];
 
   public setConfig(config: HistoryGraphCardConfig): void {
     assert(config, cardConfigStruct);
@@ -157,7 +157,7 @@ export class HuiHistoryGraphCardEditor extends LitElement
     fireEvent(this, "config-changed", { config: this._config });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return configElementStyle;
   }
 }

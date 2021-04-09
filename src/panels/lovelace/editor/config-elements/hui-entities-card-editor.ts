@@ -4,10 +4,10 @@ import "@polymer/paper-item/paper-item";
 import "@polymer/paper-listbox/paper-listbox";
 import {
   css,
-  CSSResultArray,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -62,11 +62,11 @@ export class HuiEntitiesCardEditor extends LitElement
   implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: EntitiesCardConfig;
+  @state() private _config?: EntitiesCardConfig;
 
-  @internalProperty() private _configEntities?: LovelaceRowConfig[];
+  @state() private _configEntities?: LovelaceRowConfig[];
 
-  @internalProperty() private _subElementEditorConfig?: SubElementEditorConfig;
+  @state() private _subElementEditorConfig?: SubElementEditorConfig;
 
   public setConfig(config: EntitiesCardConfig): void {
     assert(config, cardConfigStruct);
@@ -267,7 +267,7 @@ export class HuiEntitiesCardEditor extends LitElement
     this._subElementEditorConfig = undefined;
   }
 
-  static get styles(): CSSResultArray {
+  static get styles(): CSSResultGroup {
     return [
       configElementStyle,
       css`

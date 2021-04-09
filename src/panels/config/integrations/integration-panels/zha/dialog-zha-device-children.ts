@@ -1,8 +1,8 @@
 import {
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -33,9 +33,9 @@ export interface DeviceRowData extends DataTableRowData {
 class DialogZHADeviceChildren extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
 
-  @internalProperty() private _device: ZHADevice | undefined;
+  @state() private _device: ZHADevice | undefined;
 
-  @internalProperty() private _devices: Map<string, ZHADevice> | undefined;
+  @state() private _devices: Map<string, ZHADevice> | undefined;
 
   private _deviceChildren = memoizeOne(
     (
@@ -76,9 +76,7 @@ class DialogZHADeviceChildren extends LitElement {
     },
   };
 
-  public showDialog(
-    params: ZHADeviceChildrenDialogParams
-  ): void {
+  public showDialog(params: ZHADeviceChildrenDialogParams): void {
     this._device = params.device;
     this._fetchData();
   }
@@ -134,7 +132,7 @@ class DialogZHADeviceChildren extends LitElement {
     }
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return haStyleDialog;
   }
 }

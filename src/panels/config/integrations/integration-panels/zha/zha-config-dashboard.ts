@@ -4,7 +4,7 @@ import "@polymer/paper-item/paper-item";
 import "@polymer/paper-item/paper-item-body";
 import {
   css,
-  CSSResultArray,
+  CSSResultGroup,
   customElement,
   html,
   LitElement,
@@ -100,7 +100,7 @@ class ZHAConfigDashboard extends LitElement {
     `;
   }
 
-  static get styles(): CSSResultArray {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       css`

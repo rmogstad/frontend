@@ -3,10 +3,10 @@ import "@material/mwc-tab/mwc-tab";
 import type { MDCTabBarActivatedEvent } from "@material/tab-bar";
 import {
   css,
-  CSSResultArray,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   query,
@@ -45,13 +45,13 @@ export class HuiConditionalCardEditor extends LitElement
 
   @property({ attribute: false }) public lovelace?: LovelaceConfig;
 
-  @internalProperty() private _config?: ConditionalCardConfig;
+  @state() private _config?: ConditionalCardConfig;
 
-  @internalProperty() private _GUImode = true;
+  @state() private _GUImode = true;
 
-  @internalProperty() private _guiModeAvailable? = true;
+  @state() private _guiModeAvailable? = true;
 
-  @internalProperty() private _cardTab = false;
+  @state() private _cardTab = false;
 
   @query("hui-card-element-editor")
   private _cardEditorEl?: HuiCardElementEditor;
@@ -298,7 +298,7 @@ export class HuiConditionalCardEditor extends LitElement
     fireEvent(this, "config-changed", { config: this._config });
   }
 
-  static get styles(): CSSResultArray {
+  static get styles(): CSSResultGroup {
     return [
       configElementStyle,
       css`

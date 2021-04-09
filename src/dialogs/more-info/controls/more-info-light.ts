@@ -2,10 +2,10 @@ import "@polymer/paper-item/paper-item";
 import "@polymer/paper-listbox/paper-listbox";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -39,17 +39,17 @@ class MoreInfoLight extends LitElement {
 
   @property({ attribute: false }) public stateObj?: LightEntity;
 
-  @internalProperty() private _brightnessSliderValue = 0;
+  @state() private _brightnessSliderValue = 0;
 
-  @internalProperty() private _ctSliderValue = 0;
+  @state() private _ctSliderValue = 0;
 
-  @internalProperty() private _wvSliderValue = 0;
+  @state() private _wvSliderValue = 0;
 
-  @internalProperty() private _hueSegments = 24;
+  @state() private _hueSegments = 24;
 
-  @internalProperty() private _saturationSegments = 8;
+  @state() private _saturationSegments = 8;
 
-  @internalProperty() private _colorPickerColor?: HueSatColor;
+  @state() private _colorPickerColor?: HueSatColor;
 
   protected render(): TemplateResult {
     if (!this.hass || !this.stateObj) {
@@ -252,7 +252,7 @@ class MoreInfoLight extends LitElement {
     });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       .content {
         display: flex;

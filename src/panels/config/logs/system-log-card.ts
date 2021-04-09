@@ -2,10 +2,10 @@ import "@polymer/paper-item/paper-item";
 import "@polymer/paper-item/paper-item-body";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -31,7 +31,7 @@ export class SystemLogCard extends LitElement {
 
   public loaded = false;
 
-  @internalProperty() private _items?: LoggedError[];
+  @state() private _items?: LoggedError[];
 
   public async fetchData(): Promise<void> {
     this._items = undefined;
@@ -149,7 +149,7 @@ export class SystemLogCard extends LitElement {
     showSystemLogDetailDialog(this, { item });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       ha-card {
         padding-top: 16px;

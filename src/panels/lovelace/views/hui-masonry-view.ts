@@ -1,9 +1,9 @@
 import { mdiPlus } from "@mdi/js";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -59,7 +59,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
 
   @property({ attribute: false }) public badges: LovelaceBadge[] = [];
 
-  @internalProperty() private _columns?: number;
+  @state() private _columns?: number;
 
   private _createColumnsIteration = 0;
 
@@ -258,7 +258,7 @@ export class MasonryView extends LitElement implements LovelaceViewElement {
     );
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         display: block;

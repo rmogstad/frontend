@@ -16,10 +16,10 @@ import {
 } from "@mdi/js";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -90,9 +90,9 @@ class HassioAddonInfo extends LitElement {
 
   @property({ attribute: false }) public supervisor!: Supervisor;
 
-  @internalProperty() private _metrics?: HassioStats;
+  @state() private _metrics?: HassioStats;
 
-  @internalProperty() private _error?: string;
+  @state() private _error?: string;
 
   private _addonStoreInfo = memoizeOne(
     (slug: string, storeAddons: StoreAddon[]) =>
@@ -242,14 +242,18 @@ class HassioAddonInfo extends LitElement {
               ? html`
                   Current version: ${this.addon.version}
                   <div class="changelog" @click=${this._openChangelog}>
-                    (<span class="changelog-link">${
-                      this.supervisor.localize("addon.dashboard.changelog")}</span
+                    (<span class="changelog-link"
+                      >${this.supervisor.localize(
+                        "addon.dashboard.changelog"
+                      )}</span
                     >)
                   </div>
                 `
-              : html`<span class="changelog-link" @click=${this._openChangelog}>${
-                  this.supervisor.localize("addon.dashboard.changelog")
-                }</span>`}
+              : html`<span class="changelog-link" @click=${this._openChangelog}
+                  >${this.supervisor.localize(
+                    "addon.dashboard.changelog"
+                  )}</span
+                >`}
           </div>
 
           <div class="description light-color">
@@ -1100,7 +1104,7 @@ class HassioAddonInfo extends LitElement {
     button.progress = false;
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       hassioStyle,

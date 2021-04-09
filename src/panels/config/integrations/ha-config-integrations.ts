@@ -7,10 +7,10 @@ import Fuse from "fuse.js";
 import { UnsubscribeFunc } from "home-assistant-js-websocket";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -108,30 +108,30 @@ class HaConfigIntegrations extends SubscribeMixin(LitElement) {
 
   @property() public route!: Route;
 
-  @internalProperty() private _configEntries?: ConfigEntryExtended[];
+  @state() private _configEntries?: ConfigEntryExtended[];
 
   @property()
   private _configEntriesInProgress: DataEntryFlowProgressExtended[] = [];
 
-  @internalProperty()
+  @state()
   private _entityRegistryEntries: EntityRegistryEntry[] = [];
 
-  @internalProperty()
+  @state()
   private _deviceRegistryEntries: DeviceRegistryEntry[] = [];
 
-  @internalProperty() private _manifests!: {
+  @state() private _manifests!: {
     [domain: string]: IntegrationManifest;
   };
 
-  @internalProperty() private _showIgnored = false;
+  @state() private _showIgnored = false;
 
-  @internalProperty() private _showDisabled = false;
+  @state() private _showDisabled = false;
 
-  @internalProperty() private _searchParms = new URLSearchParams(
+  @state() private _searchParms = new URLSearchParams(
     window.location.hash.substring(1)
   );
 
-  @internalProperty() private _filter?: string;
+  @state() private _filter?: string;
 
   public hassSubscribe(): UnsubscribeFunc[] {
     return [
@@ -755,7 +755,7 @@ class HaConfigIntegrations extends SubscribeMixin(LitElement) {
     });
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       css`

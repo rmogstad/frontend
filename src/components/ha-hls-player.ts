@@ -1,9 +1,9 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -41,7 +41,7 @@ class HaHLSPlayer extends LitElement {
   // don't cache this, as we remove it on disconnects
   @query("video") private _videoEl!: HTMLVideoElement;
 
-  @internalProperty() private _attached = false;
+  @state() private _attached = false;
 
   private _hlsPolyfillInstance?: Hls;
 
@@ -221,7 +221,7 @@ class HaHLSPlayer extends LitElement {
     }
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host,
       video {

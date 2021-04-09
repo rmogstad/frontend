@@ -1,10 +1,10 @@
 import "@material/mwc-button/mwc-button";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -21,7 +21,7 @@ export class HaDeviceActionsZWaveJS extends LitElement {
 
   @property() public device!: DeviceRegistryEntry;
 
-  @internalProperty() private _entryId?: string;
+  @state() private _entryId?: string;
 
   protected updated(changedProperties: PropertyValues) {
     if (changedProperties.has("device")) {
@@ -43,7 +43,7 @@ export class HaDeviceActionsZWaveJS extends LitElement {
     `;
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       css`

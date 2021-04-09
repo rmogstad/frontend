@@ -3,10 +3,10 @@ import "@polymer/paper-item/paper-item";
 import "@polymer/paper-listbox/paper-listbox";
 import {
   css,
-  CSSResultArray,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -37,7 +37,7 @@ export class HuiAlarmPanelCardEditor extends LitElement
   implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: AlarmPanelCardConfig;
+  @state() private _config?: AlarmPanelCardConfig;
 
   public setConfig(config: AlarmPanelCardConfig): void {
     assert(config, cardConfigStruct);
@@ -127,7 +127,7 @@ export class HuiAlarmPanelCardEditor extends LitElement
     `;
   }
 
-  static get styles(): CSSResultArray {
+  static get styles(): CSSResultGroup {
     return [
       configElementStyle,
       css`

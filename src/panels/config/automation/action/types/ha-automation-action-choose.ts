@@ -3,7 +3,7 @@ import "@polymer/paper-input/paper-input";
 import "@polymer/paper-listbox/paper-listbox";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   LitElement,
   property,
@@ -147,7 +147,7 @@ export class HaChooseAction extends LitElement implements ActionElement {
     });
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyle,
       css`

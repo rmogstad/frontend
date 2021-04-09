@@ -1,6 +1,6 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   html,
   LitElement,
   property,
@@ -129,7 +129,8 @@ class HuiGenericEntityRow extends LitElement {
                     stateObj.attributes.brightness
                   ? html`${Math.round(
                       (stateObj.attributes.brightness / 255) * 100
-                    )} %`
+                    )}
+                    %`
                   : "")}
               </div>
             `
@@ -155,7 +156,7 @@ class HuiGenericEntityRow extends LitElement {
     handleAction(this, this.hass!, this.config!, ev.detail.action!);
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       :host {
         display: flex;

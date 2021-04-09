@@ -1,8 +1,8 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -31,11 +31,11 @@ class HaAuthorize extends litLocalizeLiteMixin(LitElement) {
 
   @property() public oauth2State?: string;
 
-  @internalProperty() private _authProvider?: AuthProvider;
+  @state() private _authProvider?: AuthProvider;
 
-  @internalProperty() private _authProviders?: AuthProvider[];
+  @state() private _authProviders?: AuthProvider[];
 
-  @internalProperty() private _discovery?: DiscoveryInformation;
+  @state() private _discovery?: DiscoveryInformation;
 
   constructor() {
     super();
@@ -174,7 +174,7 @@ class HaAuthorize extends litLocalizeLiteMixin(LitElement) {
     this._authProvider = ev.detail;
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       ha-pick-auth-provider {
         display: block;

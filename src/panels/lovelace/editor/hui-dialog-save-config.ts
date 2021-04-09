@@ -3,10 +3,10 @@ import "@material/mwc-icon-button/mwc-icon-button";
 import { mdiHelpCircle } from "@mdi/js";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -31,11 +31,11 @@ const EMPTY_CONFIG = { views: [] };
 export class HuiSaveConfig extends LitElement implements HassDialog {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _params?: SaveDialogParams;
+  @state() private _params?: SaveDialogParams;
 
-  @internalProperty() private _emptyConfig = false;
+  @state() private _emptyConfig = false;
 
-  @internalProperty() private _saving: boolean;
+  @state() private _saving: boolean;
 
   public constructor() {
     super();
@@ -188,7 +188,7 @@ export class HuiSaveConfig extends LitElement implements HassDialog {
     }
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyleDialog,
       css`

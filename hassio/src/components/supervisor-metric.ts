@@ -1,6 +1,6 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
   LitElement,
@@ -41,7 +41,7 @@ class SupervisorMetric extends LitElement {
     </ha-settings-row>`;
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       ha-settings-row {
         padding: 0;

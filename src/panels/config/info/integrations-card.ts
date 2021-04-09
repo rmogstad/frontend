@@ -1,9 +1,9 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -23,15 +23,16 @@ import { brandsUrl } from "../../../util/brands-url";
 class IntegrationsCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
 
-  @internalProperty() private _manifests?: {
+  @state() private _manifests?: {
     [domain: string]: IntegrationManifest;
   };
 
   private _sortedIntegrations = memoizeOne((components: string[]) => {
     return Array.from(
       new Set(
-        components
-          .map((comp) => (comp.includes(".") ? comp.split(".")[1] : comp))
+        components.map((comp) =>
+          comp.includes(".") ? comp.split(".")[1] : comp
+        )
       )
     ).sort();
   });
@@ -115,7 +116,7 @@ class IntegrationsCard extends LitElement {
     this._manifests = manifests;
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       td {
         padding: 0 8px;

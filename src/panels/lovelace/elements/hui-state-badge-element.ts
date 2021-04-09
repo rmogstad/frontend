@@ -1,7 +1,7 @@
 import {
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -25,7 +25,7 @@ export class HuiStateBadgeElement extends LitElement
   implements LovelaceElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: StateBadgeElementConfig;
+  @state() private _config?: StateBadgeElementConfig;
 
   public setConfig(config: StateBadgeElementConfig): void {
     if (!config.entity) {

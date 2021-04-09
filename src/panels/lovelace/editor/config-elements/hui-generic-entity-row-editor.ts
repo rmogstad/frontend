@@ -1,9 +1,9 @@
 import "@polymer/paper-input/paper-input";
 import {
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -43,7 +43,7 @@ export class HuiGenericEntityRowEditor extends LitElement
   implements LovelaceRowEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: EntitiesCardEntityConfig;
+  @state() private _config?: EntitiesCardEntityConfig;
 
   public setConfig(config: EntitiesCardEntityConfig): void {
     assert(config, entitiesConfigStruct);
@@ -162,7 +162,7 @@ export class HuiGenericEntityRowEditor extends LitElement
     fireEvent(this, "config-changed", { config: this._config });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return configElementStyle;
   }
 }

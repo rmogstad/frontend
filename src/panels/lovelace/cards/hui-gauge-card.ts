@@ -1,10 +1,10 @@
 import { HassEntity } from "home-assistant-js-websocket/dist/types";
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   PropertyValues,
@@ -64,7 +64,7 @@ class HuiGaugeCard extends LitElement implements LovelaceCard {
 
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @internalProperty() private _config?: GaugeCardConfig;
+  @state() private _config?: GaugeCardConfig;
 
   public getCardSize(): number {
     return 4;
@@ -207,7 +207,7 @@ class HuiGaugeCard extends LitElement implements LovelaceCard {
     fireEvent(this, "hass-more-info", { entityId: this._config!.entity });
   }
 
-  static get styles(): CSSResult {
+  static get styles(): CSSResultGroup {
     return css`
       ha-card {
         cursor: pointer;

@@ -1,9 +1,9 @@
 import {
   css,
-  CSSResult,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   property,
   TemplateResult,
@@ -22,11 +22,11 @@ import { fireEvent } from "../../../../../common/dom/fire_event";
 class DialogZHAReconfigureDevice extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
 
-  @internalProperty() private _active = false;
+  @state() private _active = false;
 
-  @internalProperty() private _formattedEvents = "";
+  @state() private _formattedEvents = "";
 
-  @internalProperty()
+  @state()
   private _params: ZHAReconfigureDeviceDialogParams | undefined = undefined;
 
   private _subscribed?: Promise<() => Promise<void>>;
@@ -125,7 +125,7 @@ class DialogZHAReconfigureDevice extends LitElement {
     );
   }
 
-  static get styles(): CSSResult[] {
+  static get styles(): CSSResultGroup {
     return [
       haStyleDialog,
       css`

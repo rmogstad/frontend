@@ -1,10 +1,10 @@
 import "@material/mwc-button/mwc-button";
 import {
   css,
-  CSSResultArray,
+  CSSResultGroup,
   customElement,
   html,
-  internalProperty,
+  state,
   LitElement,
   TemplateResult,
 } from "lit-element";
@@ -23,7 +23,7 @@ class DomainTogglerDialog extends LitElement
   implements HassDialog<HaDomainTogglerDialogParams> {
   public hass!: HomeAssistant;
 
-  @internalProperty() private _params?: HaDomainTogglerDialogParams;
+  @state() private _params?: HaDomainTogglerDialogParams;
 
   public showDialog(params: HaDomainTogglerDialogParams): void {
     this._params = params;
@@ -90,7 +90,7 @@ class DomainTogglerDialog extends LitElement
     ev.currentTarget.blur();
   }
 
-  static get styles(): CSSResultArray {
+  static get styles(): CSSResultGroup {
     return [
       haStyleDialog,
       css`
