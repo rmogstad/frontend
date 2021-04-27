@@ -2569,7 +2569,8 @@
         },
         "zwave_js": {
           "navigation": {
-            "network": "Network"
+            "network": "Network",
+            "logs": "Logs"
           },
           "common": {
             "network": "Network",
@@ -2646,6 +2647,10 @@
             "follow_device_instructions": "Follow the directions that came with your device to trigger exclusion on the device.",
             "exclusion_failed": "The node could not be removed. Please check the logs for more information.",
             "exclusion_finished": "Node {id} has been removed from your Z-Wave network."
+          },
+          "logs": {
+            "title": "Z-Wave JS Logs",
+            "log_level": "Log Level"
           }
         }
       },
